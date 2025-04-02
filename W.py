@@ -305,7 +305,7 @@ def display_data1():
         columns = ["ID", "Smoke", "Temperature"][:num_columns]  # Adjusted column names
 
         df = pd.DataFrame(data, columns=columns)  
-        st.dataframe(df)  
+        st.dataframe(df, hide_index=True)  
     else:
         st.warning("No data available.")
 ################################# For display data1 ###############################
