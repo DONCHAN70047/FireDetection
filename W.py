@@ -320,7 +320,7 @@ def display_data2():
         columns = ["ID", "Time", "Smoke", "Temperature", "Fire"][:num_columns]  
 
         df = pd.DataFrame(data, columns=columns)  
-        st.dataframe(df)  
+        st.dataframe(df, hide_index=True)  
     else:
         st.warning("No data available.")
 ################################# For display data2 ############################### 
