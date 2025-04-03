@@ -13,6 +13,38 @@ from twilio.rest import Client
 import sqlite3
 import serial.tools.list_ports
 
+############################################################# Background colour ########################################################
+st.markdown("""
+    <style>
+        .stApp {
+            background-color: #333333;  
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+""", unsafe_allow_html=True)
+############################################################# Background colour ########################################################
+
+############################################################# For button colour #######################################################
+st.markdown("""
+    <style>
+        .stButton > button {
+            background-color: rgb(165, 165, 32);  
+            color: black;  
+            border: none;  
+            border-radius: 10px; 
+            padding: 10px 20px;  
+            font-size: 16px; 
+        }
+
+  
+        .stButton > button:hover {
+            background-color: #FDD835;  
+        }
+    </style>
+""", unsafe_allow_html=True)
+############################################################### For button colour ######################################################
+
+
 
 
 ################################################################### Twilo account set #######################################################
@@ -67,9 +99,31 @@ def SMSAlet(message, client, recipient_number1, recipient_number2, recipient_num
     print(message.sid)
 ################################################################### SMS alet message set ######################################################
 
+########################################################################################## Title colour ######################################
+st.markdown("""
+    <style>
+        /* Custom style for the title */
+        .custom-title {
+            font-size: 50px;
+            font-weight: bold;
+            color: rgb(201, 201, 250);  
+        }
+        .emoji {
+            font-size: 46px;
+        }
+        .custom-options {
+            font-size: 40px;
+            color: green;  
+            font-weight: bold;
+        }
+    </style>
+""", unsafe_allow_html=True)
+############################################################################################## Title colour ######################################
 ############################################################# For title ######################################
-#st.title("🔥 FIRE DETECTION SYSTEM 🔥")
-st.sidebar.header("Options")
+st.markdown('<span class="emoji">🔥</span> <span class="custom-title">FIRE DETECTION SYSTEM</span> <span class="emoji">🔥</span>', unsafe_allow_html=True)
+#st.sidebar.header("Options")
+st.sidebar.markdown('<span class="custom-options">Options</span>', unsafe_allow_html=True)
+
 
 ############################################################## For title #####################################
 
@@ -305,7 +359,7 @@ def display_data1():
         columns = ["ID", "Smoke", "Temperature"][:num_columns]  # Adjusted column names
 
         df = pd.DataFrame(data, columns=columns)  
-        st.dataframe(df, hide_index=True)  
+        st.dataframe(df)  
     else:
         st.warning("No data available.")
 ################################# For display data1 ###############################
@@ -320,7 +374,7 @@ def display_data2():
         columns = ["ID", "Time", "Smoke", "Temperature", "Fire"][:num_columns]  
 
         df = pd.DataFrame(data, columns=columns)  
-        st.dataframe(df, hide_index=True)  
+        st.dataframe(df)  
     else:
         st.warning("No data available.")
 ################################# For display data2 ############################### 
@@ -416,7 +470,7 @@ def start_camera():
 ######################################################### Detection camera, smoke && temp ################################################
 
 if __name__ == "__main__":
-    st.title("🔥 FIRE DETECTION SYSTEM 🔥")
+    #st.title("🔥 FIRE DETECTION SYSTEM 🔥")
     model = load_model()
     if st.sidebar.button("Start Live Camera"):
         start_camera()
