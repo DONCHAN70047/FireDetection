@@ -163,7 +163,7 @@ Machine Learning Integration: Implementation of Convolutional Neural Networks (C
 
 Alert System: Automated SMS alerts using Twilio when a fire is detected.
 
-The software is designed to be scalable and can be enhanced with additional features in the future.
+The software is designed to be scalable and can be enhanced with additional features in the future. Future improvements will focus on optimizing performance, adding advanced analytics, and expanding the system’s capabilities for better fire detection and user experience.
 
 
 # Contact
