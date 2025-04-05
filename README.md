@@ -127,7 +127,7 @@ Notifications: Alerts for upcoming due dates.
 
 UI/UX Improvements: Enhanced user interface and experience.
 
-Twilio SMS Setup
+# Twilio SMS Setup
 To enable SMS alerts:
 
 Create a Twilio Account: Twilio Signup
@@ -154,7 +154,6 @@ recipient_number4 = '+914565852425'
 
 
 
-#Contact
-
+# Contact
 For any questions, feedback, or suggestions, feel free to contact me via:
 GitHub: https://github.com/DONCHAN70047
