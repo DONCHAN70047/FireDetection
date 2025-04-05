@@ -10,9 +10,9 @@ href="https://firedetectionby-fqtu6ckaggh5yhkohlqw4m.streamlit.app/" target="_bl
 
 ## 📋 Features
 
-- **Real-time Fire Detection**: Detect fire using uploaded images or live video.
+- **Real-time Fire Detection**: Detect fire using detected images or live video.
 - **Fast and Accurate**: Uses machine learning models to identify potential fire hazards.
-- **User-friendly Interface**: Intuitive UI to easily upload images and get results.
+- **User-friendly Interface**: Intuitive UI to easily detected images and get results.
 - **Interactive Results**: View detection outputs with confidence scores and fire zones.
 
 ---
