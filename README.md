@@ -152,6 +152,18 @@ recipient_number3 = '+915646546555'
 recipient_number4 = '+914565852425'
 
 
+# Software Development
+The software for the Fire Detection Project is developed to integrate hardware components (camera, smoke sensor, temperature sensor, and Arduino board) with machine learning algorithms for real-time fire detection. The software includes:
+
+Backend Development: Handling data storage, sensor communication, and real-time processing using SQLite.
+
+Frontend Development: A user-friendly web interface built with Streamlit for visualizing fire data and sensor statistics.
+
+Machine Learning Integration: Implementation of Convolutional Neural Networks (CNN) for accurate fire detection through image classification.
+
+Alert System: Automated SMS alerts using Twilio when a fire is detected.
+
+The software is designed to be scalable and can be enhanced with additional features in the future.
 
 
 # Contact
