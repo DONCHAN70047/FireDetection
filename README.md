@@ -80,7 +80,7 @@ SMS Service: Twilio
 
 # Setup Instructions
 1. Prerequisites:
-Install Python 3.10.0 or higher.
+Install Python 3.10.0 .
 
 Ensure Arduino is connected to your computer.
 
