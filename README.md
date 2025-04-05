@@ -26,7 +26,7 @@ href="https://firedetectionby-fqtu6ckaggh5yhkohlqw4m.streamlit.app/" target="_bl
 
 
 
-Table of Contents
+# Table of Contents
 Introduction
 
 Features
@@ -43,10 +43,10 @@ Future Enhancements
 
 Contact
 
-Introduction
+# Introduction
 The Fire Detection Project is designed to detect fires in real-time using a combination of hardware and machine learning. It uses a camera for image-based fire detection, smoke and temperature sensors for environmental monitoring, and an Arduino board to interface with the sensors. The system sends alerts via SMS when a fire is detected.
 
-Features
+# Features
 Real-time fire detection using image classification with Convolutional Neural Networks (CNN).
 
 Smoke and temperature monitoring using MQ2 and DHT11 sensors.
@@ -58,7 +58,7 @@ Data storage and visualization in the web application.
 Separate display pages for fire data and sensor data.
 
 Technologies Used
-Hardware:
+# Hardware:
 
 Arduino Uno Board (with DHT11 Temperature Sensor)
 
@@ -68,7 +68,7 @@ DHT11 Temperature Sensor
 
 Camera for Fire Image Detection
 
-Software:
+# Software:
 
 Backend: SQLite (or any preferred database)
 
@@ -78,7 +78,7 @@ Machine Learning: TensorFlow (CNN for image classification)
 
 SMS Service: Twilio
 
-Setup Instructions
+# Setup Instructions
 1. Prerequisites:
 Install Python 3.10.0 or higher.
 
