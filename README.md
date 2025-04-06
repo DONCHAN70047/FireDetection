@@ -2,11 +2,7 @@
 
 Welcome to the **FireDetection** app! This application leverages Streamlit to provide real-time fire detection capabilities using machine learning and computer vision. The goal is to help prevent fire hazards and assist in timely emergency responses.
 
-<a
-href="https://firedetectionby-fqtu6ckaggh5yhkohlqw4m.streamlit.app/" target="_blank">
-<img  src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-lighttext.png" alt="FireDetection App">
-</a>
----
+
 
 ## 📋 Features
 
