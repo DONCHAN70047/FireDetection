@@ -12,6 +12,10 @@ import pyttsx3
 from twilio.rest import Client
 import sqlite3
 import serial.tools.list_ports
+import gdown
+import requests
+import os
+
 
 ############################################################# Background colour ########################################################
 st.markdown("""
@@ -293,12 +297,47 @@ def connectSerial():
 
 ########################################################### Load Fire Detection Model  ############################################### 
 @st.cache_resource
+
+def download_model_from_drive(drive_url, output_filename="m.h5"):
+    try:
+        file_id = drive_url.split("/d/")[1].split("/")[0]
+        download_url = f"https://drive.google.com/uc?id={file_id}&export=download"
+
+        # Download the file
+        response = requests.get(download_url)
+        response.raise_for_status()
+
+        # Save the file locally
+        with open(output_filename, "wb") as file:
+            file.write(response.content)
+
+        st.success(f"✅ Model downloaded successfully as '{output_filename}'!")
+        return output_filename
+    except Exception as e:
+        st.error(f"❌ Failed to download model: {e}")
+        return None
+
 def load_model():
     try:
-        return tf.keras.models.load_model("model.h5")  
+        model_path = "m.h5"  
+
+        if not os.path.exists(model_path):
+            st.warning(f"⚠️ File '{model_path}' not found. Downloading from Drive...")
+            drive_url = "https://drive.google.com/file/d/117DDsMO0mle9IAFz-FO45PdTiXotNR5X/view?usp=drive_link"  # Your Drive link
+            download_model_from_drive(drive_url, model_path)
+
+        # Load the model
+        model = tf.keras.models.load_model(model_path)
+        st.success("✅ Model loaded successfully!")
+        return model
     except Exception as e:
         st.error(f"❌ Error loading model: {e}")
         return None
+
+
+
+
+
 ############################################################### Load Fire Detection Model ################################################
 
 ################################################################# Fire Prediction using camera ######################################################
@@ -436,9 +475,10 @@ def start_camera():
 
         
         CameraValue = predict_image(img_path)
+        
         #CameraValue = 0.4
-        #analogTemp = 300
-        #temperatureC = 15
+        #analogTemp = 100
+        #temperatureC = 1
         if CameraValue is not None:
             if CameraValue > 0.3 and analogTemp >= 250 and temperatureC >= 13:  
                 count += 1
@@ -454,15 +494,17 @@ def start_camera():
                             SMSAlet(message, SMSSource(), recipient_number1, recipient_number2,  recipient_number3, recipient_number4) 
                         else :
                             print(i) 
+                            
                     return  
             else:
                 prediction_placeholder.subheader(f"✅ No Fire Detected ")   #{str(CameraValue)}
+                count = 0
                 insert_sensor_dataTemp(analogTemp, temperatureC)
                 delete_oldest_record()
                 
                 
 
-        tt.sleep(1)  
+        #tt.sleep(0.5)  
 
     cap.release()
     cv2.destroyAllWindows()
