@@ -88,7 +88,7 @@ cd [repository-name]
 3. Install Required Packages:
 bash
 Copy
-pip install streamlit mysql-connector-python pyserial tensorflow numpy pandas opencv-python pyttsx3 twilio
+ 'pip install streamlit mysql-connector-python pyserial tensorflow numpy pandas opencv-python pyttsx3 twilio gdown'
 4. Arduino Setup:
 Open the provided Arduino code file in the Arduino IDE.
 
