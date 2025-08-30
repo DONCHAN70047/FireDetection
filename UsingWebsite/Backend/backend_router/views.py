@@ -32,7 +32,7 @@ from PIL import Image
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
+from django.http import JsonResponse
 
 
 
@@ -46,6 +46,11 @@ cloudinary.config(
     secure=True
 )
 # ...................................................... Secure key ...................................................
+
+# ...................................................... For start ....................................................
+def home(request):
+    return JsonResponse({"status": "Backend is running 🚀"})
+# ...................................................... For start ....................................................
 
 
 # .......................................... DisesDetection ...................................................
