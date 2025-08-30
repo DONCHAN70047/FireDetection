@@ -140,7 +140,7 @@ GitHub: https://github.com/DONCHAN70047
 
 
 ## 🔗 Live Demo
-[Fire Detection Website](https://fire-detection-ashen.vercel.app/)  
+Fire Detection Website :- https://fire-detection-ashen.vercel.app  
 
 ⚠️ **Note:**  
 - The backend is hosted on **Render** (free tier), so predictions may take some time to load.  
