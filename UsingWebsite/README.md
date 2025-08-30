@@ -134,7 +134,7 @@ The software is designed to be scalable and can be enhanced with additional feat
 
 For any questions, feedback, or suggestions, feel free to contact me via:
 GitHub: https://github.com/DONCHAN70047
-
+```
 
 
 
@@ -151,5 +151,5 @@ Fire Detection Website :- https://fire-detection-ashen.vercel.app
 
 ## 🛠 Support
 If you encounter any issues or have questions, please **contact our team via GitHub**:  
-[GitHub Issues](https://github.com/YOUR_GITHUB_REPO/issues)
+GitHub : https://github.com/DONCHAN70047
 
