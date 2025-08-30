@@ -108,12 +108,12 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://fire-detection-gdc41b5ga-donchan70047s-projects.vercel.app",
+    "https://fire-detection-ashen.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
-    "https://fire-detection-gdc41b5ga-donchan70047s-projects.vercel.app",
+    "https://fire-detection-ashen.vercel.app",
 ]
 
 CORS_ALLOW_METHODS = [
