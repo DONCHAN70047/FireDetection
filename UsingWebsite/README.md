@@ -134,3 +134,22 @@ The software is designed to be scalable and can be enhanced with additional feat
 
 For any questions, feedback, or suggestions, feel free to contact me via:
 GitHub: https://github.com/DONCHAN70047
+
+
+
+
+
+## 🔗 Live Demo
+[Fire Detection Website](https://fire-detection-ashen.vercel.app/)  
+
+⚠️ **Note:**  
+- The backend is hosted on **Render** (free tier), so predictions may take some time to load.  
+- Hosting the backend on a **paid server** will significantly improve response time and provide faster predictions.  
+- For **better accuracy**, you can integrate the hardware components that we provide. Otherwise, the system will make predictions using your device camera by default.
+
+---
+
+## 🛠 Support
+If you encounter any issues or have questions, please **contact our team via GitHub**:  
+[GitHub Issues](https://github.com/YOUR_GITHUB_REPO/issues)
+
