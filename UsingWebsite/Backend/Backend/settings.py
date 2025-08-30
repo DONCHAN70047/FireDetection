@@ -107,14 +107,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://agri-smart-upolabdhi-backend-4-i6y6.onrender.com",
     "http://localhost:5173",
+    "https://fire-detection-gdc41b5ga-donchan70047s-projects.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://agri-smart-upolabdhi-backend-4-i6y6.onrender.com",
-    "https://agri-smart-upolabdhi-backend-3-w22q.onrender.com",
     "http://localhost:5173",
+    "https://fire-detection-gdc41b5ga-donchan70047s-projects.vercel.app",
 ]
 
 CORS_ALLOW_METHODS = [
