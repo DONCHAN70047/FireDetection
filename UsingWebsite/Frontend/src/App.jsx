@@ -9,6 +9,7 @@ export default function LivePredict() {
   const [intervalId, setIntervalId] = useState(null);
   const [cameras, setCameras] = useState([]);
   const [selectedCamera, setSelectedCamera] = useState("");
+  const [homeMessage, setHomeMessage] = useState(""); // ✅ New state
   const navigate = useNavigate();
 
   // 🔹 Get all cameras on mount
@@ -26,17 +27,29 @@ export default function LivePredict() {
       }
     };
     getCameras();
+
+    // 🔹 Call Django Home Endpoint
+    fetchHome();
   }, []);
+
+  // 🔹 Fetch Django home view
+  const fetchHome = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/home/`);
+      const data = await res.json();
+      setHomeMessage(data.message || "Connected to backend!");
+    } catch (err) {
+      console.error("Error fetching home:", err);
+      setHomeMessage("Could not connect to backend");
+    }
+  };
 
   // 🔹 Start Camera with selected device
   const startCamera = async (deviceId = selectedCamera) => {
     try {
       stopCamera(); // Stop any previous streams first
 
-      const constraints = {
-        video: { deviceId: { exact: deviceId } },
-      };
-
+      const constraints = { video: { deviceId: { exact: deviceId } } };
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
       videoRef.current.play();
@@ -50,19 +63,14 @@ export default function LivePredict() {
         const ctx = canvas.getContext("2d");
         ctx.drawImage(videoRef.current, 0, 0, 224, 224);
 
-        const blob = await new Promise((resolve) =>
-          canvas.toBlob(resolve, "image/jpeg")
-        );
+        const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg"));
         const formData = new FormData();
         formData.append("file", blob, "frame.jpg");
 
-        const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/detect/`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/detect/`, {
+          method: "POST",
+          body: formData,
+        });
         const data = await res.json();
         setPrediction(data.prediction);
       }, 2000);
@@ -91,7 +99,7 @@ export default function LivePredict() {
     const deviceId = event.target.value;
     setSelectedCamera(deviceId);
     if (isRunning) {
-      startCamera(deviceId); // Switch instantly if running
+      startCamera(deviceId);
     }
   };
 
@@ -103,7 +111,17 @@ export default function LivePredict() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-4">
       <div className="w-full max-w-lg bg-gray-950/70 backdrop-blur-lg shadow-2xl rounded-2xl border border-gray-700 p-6 flex flex-col items-center">
-        
+
+        {/* 🔹 Backend Connection Status */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="text-sm text-gray-400 mb-2"
+        >
+          {homeMessage}
+        </motion.div>
+
         {/* Title */}
         <motion.h1
           initial={{ y: -20, opacity: 0 }}
