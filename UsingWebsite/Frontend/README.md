@@ -17,7 +17,7 @@ Welcome to the **FireDetection** app! This application leverages Streamlit to pr
 
 # 1. Clone the Repository
 ```bash
-git clone https://github.com/CodingPheonix/AGRI-SMART-UPOLABDHI.git
+https://github.com/DONCHAN70047/FireDetection.git
 ```
 
 # 2. Change directory to Frontend
