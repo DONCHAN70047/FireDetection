@@ -1,17 +1,43 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 export default function LivePredict() {
   const videoRef = useRef(null);
   const [prediction, setPrediction] = useState("");
   const [isRunning, setIsRunning] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
-  const navigate = useNavigate(); 
+  const [cameras, setCameras] = useState([]);
+  const [selectedCamera, setSelectedCamera] = useState("");
+  const navigate = useNavigate();
 
-  const startCamera = async () => {
+  // 🔹 Get all cameras on mount
+  useEffect(() => {
+    const getCameras = async () => {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter((device) => device.kind === "videoinput");
+        setCameras(videoDevices);
+        if (videoDevices.length > 0) {
+          setSelectedCamera(videoDevices[0].deviceId); // Default first camera
+        }
+      } catch (error) {
+        console.error("Error getting cameras:", error);
+      }
+    };
+    getCameras();
+  }, []);
+
+  // 🔹 Start Camera with selected device
+  const startCamera = async (deviceId = selectedCamera) => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stopCamera(); // Stop any previous streams first
+
+      const constraints = {
+        video: { deviceId: { exact: deviceId } },
+      };
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
       videoRef.current.play();
 
@@ -48,6 +74,7 @@ export default function LivePredict() {
     }
   };
 
+  // 🔹 Stop Camera
   const stopCamera = () => {
     if (intervalId) clearInterval(intervalId);
     setIsRunning(false);
@@ -59,7 +86,16 @@ export default function LivePredict() {
     }
   };
 
+  // 🔹 Change Camera
+  const handleCameraChange = (event) => {
+    const deviceId = event.target.value;
+    setSelectedCamera(deviceId);
+    if (isRunning) {
+      startCamera(deviceId); // Switch instantly if running
+    }
+  };
 
+  // 🔹 Navigate to records page
   const record = () => {
     navigate("/records");
   };
@@ -67,7 +103,8 @@ export default function LivePredict() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-4">
       <div className="w-full max-w-lg bg-gray-950/70 backdrop-blur-lg shadow-2xl rounded-2xl border border-gray-700 p-6 flex flex-col items-center">
-        {/* ...............Title................. */}
+        
+        {/* Title */}
         <motion.h1
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -77,7 +114,22 @@ export default function LivePredict() {
           Live Prediction System 🎥
         </motion.h1>
 
-        {/* .......VideoPreview.......... */}
+        {/* Camera Selector */}
+        {cameras.length > 1 && (
+          <select
+            value={selectedCamera}
+            onChange={handleCameraChange}
+            className="mb-4 bg-gray-800 border border-gray-600 text-white p-2 rounded-xl"
+          >
+            {cameras.map((camera, index) => (
+              <option key={camera.deviceId} value={camera.deviceId}>
+                {camera.label || `Camera ${index + 1}`}
+              </option>
+            ))}
+          </select>
+        )}
+
+        {/* Video Preview */}
         <motion.video
           ref={videoRef}
           className="rounded-2xl border-4 border-blue-500 shadow-lg mb-4"
@@ -86,7 +138,7 @@ export default function LivePredict() {
           muted
         />
 
-        {/* ...............PredictionOutput................. */}
+        {/* Prediction */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -95,24 +147,22 @@ export default function LivePredict() {
         >
           <h2 className="text-lg font-bold tracking-wide">
             Prediction:{" "}
-            <span className="text-green-400">
-              {prediction || "Waiting..."}
-            </span>
+            <span className="text-green-400">{prediction || "Waiting..."}</span>
           </h2>
         </motion.div>
 
-        {/* ...............Controls................. */}
+        {/* Controls */}
         <div className="flex gap-4">
           {!isRunning ? (
             <div className="flex gap-4">
               <button
-                onClick={startCamera}
+                onClick={() => startCamera(selectedCamera)}
                 className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl shadow-lg transition-all duration-300"
               >
                 ▶ Start
               </button>
               <button
-                onClick={record} 
+                onClick={record}
                 className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-xl shadow-lg transition-all duration-300"
               >
                 ⏺ Record Data
